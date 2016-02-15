@@ -5,6 +5,13 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 
+  root 'game#home'
+  
+  get 'play/:token', to: 'game#play', as: :play_game
+  get 'start', to: 'game#start_game'
+
+  get '*path' => redirect('/') #any other route redirect to home
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
