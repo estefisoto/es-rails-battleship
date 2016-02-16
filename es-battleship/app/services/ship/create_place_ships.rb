@@ -9,7 +9,7 @@ class CreatePlaceShips
 
 		def initialize(player:)
 			raise ArgumentError.new("player cannot be nil") if player.nil?
-    	@ocean = Ocean.where(player: player).first
+    	@ocean = Ocean.find_by(player: player)
     	raise ArgumentError.new("ocean cannot be nil") if @ocean.nil?
 		end
 
@@ -33,9 +33,7 @@ class CreatePlaceShips
 		private
 
 		def get_rand_delta
-			rand = rand(3).to_s
-			puts "Random orientation #{rand}"
-			CreatePlaceShips::ORIENTATION_MAP[rand]
+			CreatePlaceShips::ORIENTATION_MAP[rand(3).to_s]
 		end
 
 		def get_first_location

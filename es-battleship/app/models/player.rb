@@ -12,7 +12,7 @@ class Player < ActiveRecord::Base
 	  self.token = loop do
 	    #loop until a unique token is found
 	    random_token =  Array.new(token_size).map{valid_chars[rand(valid_chars.size)]}.join()
-	    break random_token unless Player.where(token: random_token).length > 0 
+	    break random_token if Player.find_by(token: random_token).nil?
 	  end
 	end
 
