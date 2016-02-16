@@ -1,7 +1,7 @@
 class Location < ActiveRecord::Base
 	attr_accessible :x, :y, :state
-	belongs_to :ship
 	belongs_to :ocean
+	belongs_to :ship
 	# Location States
 	OPEN = 'Open'.freeze
 	OCCUPPIED = 'Occuppied'.freeze

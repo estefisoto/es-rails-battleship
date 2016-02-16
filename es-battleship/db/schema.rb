@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 20160215034021) do
 
   create_table "ships", force: :cascade do |t|
     t.string   "kind"
+    t.boolean  "sunk_state"
     t.integer  "ocean_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

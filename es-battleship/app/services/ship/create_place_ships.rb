@@ -61,20 +61,26 @@ class CreatePlaceShips
 		end
 
 		def set_ship_locations
+			# TODO order corrrectly
 			@first_loc.state = Location::LOCATION_STATE_MAP[Location::OCCUPPIED]
 			@last_loc.state = Location::LOCATION_STATE_MAP[Location::OCCUPPIED]
 			@first_loc.save
 			@last_loc.save
-			@ship.locations << @first_loc
-			@ship.locations << @last_loc
+			set_location @first_loc
+			set_location @last_loc
 			for i in 1..(@ship_length-2)
 				x = @first_loc.x + @delta[:x] * i
 				y = @first_loc.y + @delta[:y] * i
 				loc = Location.new(x:x, y:y)
 				loc.state = Location::LOCATION_STATE_MAP[Location::OCCUPPIED]
 				loc.save
-				@ship.locations << loc
+				set_location loc
 			end
+		end
+
+		def set_location(loc)
+			@ship.locations << loc
+			@ocean.locations << loc
 		end
 
 end
