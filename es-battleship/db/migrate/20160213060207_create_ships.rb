@@ -1,8 +1,8 @@
 class CreateShips < ActiveRecord::Migration
   def change
     create_table :ships do |t|
-    	t.belongs_to :ship, index: true
-    	t.belongs_to :player, index: true
+    	t.string :kind
+    	t.belongs_to :ocean, index: true
       t.timestamps null: false
     end
   end

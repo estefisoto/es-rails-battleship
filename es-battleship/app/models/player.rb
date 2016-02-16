@@ -1,7 +1,6 @@
 class Player < ActiveRecord::Base
 	attr_accessible :token
 	belongs_to :game
-	has_many :ships, dependent: :destroy
 
 	before_create :create_unique_token
 

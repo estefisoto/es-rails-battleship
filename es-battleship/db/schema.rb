@@ -57,13 +57,12 @@ ActiveRecord::Schema.define(version: 20160215034021) do
   add_index "players", ["game_id"], name: "index_players_on_game_id", using: :btree
 
   create_table "ships", force: :cascade do |t|
-    t.integer  "ship_id"
-    t.integer  "player_id"
+    t.string   "kind"
+    t.integer  "ocean_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  add_index "ships", ["player_id"], name: "index_ships_on_player_id", using: :btree
-  add_index "ships", ["ship_id"], name: "index_ships_on_ship_id", using: :btree
+  add_index "ships", ["ocean_id"], name: "index_ships_on_ocean_id", using: :btree
 
 end

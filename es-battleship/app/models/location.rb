@@ -4,13 +4,13 @@ class Location < ActiveRecord::Base
 	belongs_to :ocean
 	# Location States
 	OPEN = 'Open'.freeze
-	OCCUPIED = 'Occupied'.freeze
+	OCCUPPIED = 'Occuppied'.freeze
 	HIT = 'Hit'.freeze
 	MISS = 'Missed'.freeze
 	
 	LOCATION_STATE_MAP = {
 		Location::OPEN 		 => 0,
-		Location::OCCUPIED => 1,
+		Location::OCCUPPIED => 1,
 		Location::HIT  		 => 2,
 		Location::MISS 	   => 3
 	}
@@ -18,13 +18,17 @@ class Location < ActiveRecord::Base
 	def attack_update_state
 		if self.state == Location::LOCATION_STATE_MAP[Location::OPEN]
 			self.sate = Location::Missed
-		else self.state == Location::LOCATION_STATE_MAP[Location::OCCUPIED]
+		else self.state == Location::LOCATION_STATE_MAP[Location::OCCUPPIED]
 			self.state =  Location::HIT
 		end
 	end
 
 	def is_hit?
 		self.state == Location::LOCATION_STATE_MAP[Location::HIT]
+	end
+
+	def is_open?
+		self.state == Location::LOCATION_STATE_MAP[Location::OPEN]
 	end
 
 end
