@@ -1,7 +1,8 @@
 class Ship < ActiveRecord::Base
+	attr_accessible :kind
 	has_many :locations, dependent: :destroy
-	belongs_to :player
-	# Ship Types
+	belongs_to :ocean
+	# Ship Kind
 	AIRCRAFT_CARRIER = 'Aircraft Carrier'.freeze
 	BATTLESHIP = 'Battleship'.freeze
 	SUBMARINE = 'Submarine'.freeze
@@ -16,8 +17,8 @@ class Ship < ActiveRecord::Base
 		Ship::DESTROYER 			 => 2
 	}
 
-	def self.ship_legth(ship_type)
-		Ship::SHIPTYPE_LENGTH_MAP[ship_type]
+	def ship_legth
+		Ship::SHIPTYPE_LENGTH_MAP[self.kind]
 	end
 
 end
