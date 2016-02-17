@@ -1,1 +1,11 @@
+<main>
+  <%= yield %>
+</main>
 <%= javascript_include_tag "play.js" %>
+
+<%= javascript_tag do %>
+  jQuery(function($) {
+   	Estefis.BattleShipGame.start({
+    });
+  });
+<% end %>
