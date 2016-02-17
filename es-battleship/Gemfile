@@ -25,9 +25,10 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'protected_attributes'
 gem 'sprockets-rails', :require => 'sprockets/railtie'
+gem 'underscore-rails'
 gem 'coffee-script'
-gem "marionette-rails",  "~> 2.2.1"
-gem "backbone-on-rails", "~> 1.1.2"
+gem 'marionette-rails',  '~> 2.4.1'
+gem 'backbone-on-rails', '~> 1.1.2'
 gem 'compass-rails',     '~> 2.0.4'
 gem 'breakpoint',        '~> 2.5.0'
 gem 'susy',              '~> 2.2.3'
