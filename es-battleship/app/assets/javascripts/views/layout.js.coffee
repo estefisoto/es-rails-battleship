@@ -1,4 +1,6 @@
 #= require templates/layout
+#= require views/board
+
 Estefis.Views ?= {}
 class Estefis.Views.Layout extends Backbone.Marionette.LayoutView
   template: 'templates/layout'
@@ -10,3 +12,8 @@ class Estefis.Views.Layout extends Backbone.Marionette.LayoutView
     'gameStateContainer':   '.mr-game-state-container'
 
   initialize: (options) ->
+  	console.log("In Game layour initialize")
+  	@playerBoardView = new Estefis.Views.Board({row_count: 10,col_count: 10})
+
+  onShow: ->
+  	@boardContainer.show @playerBoardView
