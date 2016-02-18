@@ -1,0 +1,13 @@
+<main>
+  <%= yield %>
+</main>
+<%= javascript_include_tag "play.js" %>
+<%= javascript_tag do %>
+  jQuery(function($) {
+   	Estefis.BattleShipGame.start({
+   	 locations: <%= raw @locations.to_json %>,
+   	 row_count: <%= @row_count %>,
+   	 col_count: <%= @col_count %>
+    });
+  });
+<% end %>

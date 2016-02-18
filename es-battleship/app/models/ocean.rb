@@ -4,8 +4,8 @@ class Ocean < ActiveRecord::Base
 	belongs_to :player
 	has_many :ships, dependent: :destroy
 
-	X_MAX = Rails.application.config.row_num
-	Y_MAX = Rails.application.config.col_num
+	X_COUNT = Rails.application.config.row_num
+	Y_COUNT = Rails.application.config.col_num
 
 	def location_valid(x,y)
 		if(x >= 1 && x <= X_MAX && y>=1 && y <= Y_MAX)

@@ -6,7 +6,10 @@ class GameController < ApplicationController
 
 	def play
 		player = current_player(params[:token])
-
+		ocean = Ocean.find_by(player:player)
+		@row_count = Ocean::X_COUNT
+		@col_count = Ocean::Y_COUNT
+		@locations = LocationDecorator.decorate_collection(ocean.locations).as_json
 	end
 
 	def start_game
