@@ -10,6 +10,18 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require_tree .
- *= require_self
  */
+ #= require_tree .
+ #= require_self
+
+ .mr-self-board-container{
+
+ 	width: 50%;
+
+ }
+
+ .mr-opponent-board-container{
+
+ 	width: 50%;
+
+ }

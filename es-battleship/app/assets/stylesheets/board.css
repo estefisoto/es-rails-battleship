@@ -1,0 +1,33 @@
+td.empty {
+	width: 30px;
+	height: 30px;
+	background-color: #AFECE7;
+	border: border: 1px dotted #999999;
+}
+
+td.crusier{
+	border: border: 1px dotted #564154;
+	background-color: #E0CBA8;
+}
+
+td.aircraft-carrier{
+	border: border: 1px dotted #564154;
+	background-color: #73473E;
+}
+
+td.battleship{
+	border: border: 1px dotted #564154;
+	background-color: #656757;
+}
+
+td.submarine{
+	border: border: 1px dotted #564154;
+	background-color: #65743A;
+}
+
+td.destroyer{
+	border: border: 1px dotted #564154;
+	background-color: #F56960;
+}
+
+
