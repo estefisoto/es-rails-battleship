@@ -2,9 +2,11 @@ class FindOrCreateGame
 
 	def call
 		# If a game has oponent pending join that game, else create a new game
-	  game = Game.find_by(active_player_count: 1)
-		if game.nil?
-			game = Game.create
+	  games = Game.where(active_player_count:0..1)
+		if games.length > 0
+			game = games.first
+	  else
+	  	game = Game.create
 	  	
 	  	player1 = Player.create
 	  	player2 = Player.create

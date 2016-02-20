@@ -1,0 +1,1 @@
+<div>Waiting for opponent<img class="loading-indicator" src="<%= window.Gobstopper.AssetPaths['loading-spinner.gif'] %>"/></div>
