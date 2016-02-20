@@ -5,6 +5,7 @@
 <%= javascript_tag do %>
   jQuery(function($) {
    	Estefis.BattleShipGame.start({
+   	 player_token: <%= raw @player_token.to_json %>,
    	 locations: <%= raw @locations.to_json %>,
    	 row_count: <%= @row_count %>,
    	 col_count: <%= @col_count %>

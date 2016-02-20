@@ -18,10 +18,13 @@ class Ocean < ActiveRecord::Base
 	def check_for_hit(x,y)
 		hit_location = self.locations.find_by(x:x,y:y)
 		hit = false
-		if(hit_location && hit_location.is_occuppied?)
-			hit_location.state = Location::LOCATION_STATE_MAP[Location::HIT]
-			hit_location.save
-			hit = true
+		# If hit location if occupied then change state to hit
+		if hit_location 
+			if hit_location.is_occuppied?
+				hit_location.state = Location::LOCATION_STATE_MAP[Location::HIT]
+				hit_location.save
+				hit = true
+			end
 		else
 			loc = Location.new(x:x, y:y)
 			loc.state == Location::LOCATION_STATE_MAP[Location::MISS]
