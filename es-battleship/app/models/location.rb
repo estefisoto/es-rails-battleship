@@ -23,6 +23,10 @@ class Location < ActiveRecord::Base
 		end
 	end
 
+	def is_occuppied?
+		self.state == Location::LOCATION_STATE_MAP[Location::OCCUPPIED]
+	end 
+
 	def is_hit?
 		self.state == Location::LOCATION_STATE_MAP[Location::HIT]
 	end

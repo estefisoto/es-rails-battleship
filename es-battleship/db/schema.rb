@@ -49,19 +49,20 @@ ActiveRecord::Schema.define(version: 20160215034021) do
 
   create_table "players", force: :cascade do |t|
     t.string   "token"
+    t.boolean  "active",     default: false
     t.integer  "game_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   add_index "players", ["game_id"], name: "index_players_on_game_id", using: :btree
 
   create_table "ships", force: :cascade do |t|
     t.string   "kind"
-    t.boolean  "sunk_state"
+    t.boolean  "sunk_state", default: false
     t.integer  "ocean_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   add_index "ships", ["ocean_id"], name: "index_ships_on_ocean_id", using: :btree

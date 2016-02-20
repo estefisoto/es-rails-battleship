@@ -11,6 +11,7 @@ module EsBattleship
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
+    config.autoload_paths += Dir["#{Rails.root}/app/controllers/**/"]
     config.autoload_paths += Dir["#{Rails.root}/app/services/**/"]
     config.autoload_paths += Dir["#{Rails.root}/app/decorators/**/"]
     # Enable the asset pipeline
@@ -18,5 +19,7 @@ module EsBattleship
     
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+    config.row_num = 10
+    config.col_num = 10 
   end
 end

@@ -8,8 +8,8 @@ class Ocean < ActiveRecord::Base
 	Y_COUNT = Rails.application.config.col_num
 
 	def location_valid(x,y)
-		if(x >= 1 && x <= X_MAX && y>=1 && y <= Y_MAX)
-			self.locations.where(x:x,y:y).empty?
+		if(x >= 1 && x <= X_COUNT && y>=1 && y <= Y_COUNT)
+			self.locations.find_by(x:x,y:y).nil? 		
 		else
 			false
 		end
@@ -17,16 +17,16 @@ class Ocean < ActiveRecord::Base
 
 	def check_for_hit(x,y)
 		hit_location = self.locations.find_by(x:x,y:y)
-		if(hit_location.nil?)
+		hit = false
+		if(hit_location && hit_location.is_occuppied?)
+			hit_location.state = Location::LOCATION_STATE_MAP[Location::HIT]
+			hit_location.save
+			hit = true
+		else
 			loc = Location.new(x:x, y:y)
 			loc.state == Location::LOCATION_STATE_MAP[Location::MISS]
 			loc.save
 			self.locations << loc
-			hit = false
-		else
-			hit_location.state = Location::LOCATION_STATE_MAP[Location::HIT]
-			hit_location.save
-			hit = true
 		end
 		hit
 	end

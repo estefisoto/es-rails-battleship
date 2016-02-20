@@ -1,5 +1,5 @@
 class Player < ActiveRecord::Base
-	attr_accessible :token
+	attr_accessible :token, :active
 	belongs_to :game
 
 	before_create :create_unique_token

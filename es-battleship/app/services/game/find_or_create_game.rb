@@ -4,8 +4,6 @@ class FindOrCreateGame
 		# If a game has oponent pending join that game, else create a new game
 	  game = Game.find_by(active_player_count: 1)
 		if game.nil?
-			num_row = Rails.application.config.row_num
-      num_col =  Rails.application.config.col_num
 			game = Game.create
 	  	
 	  	player1 = Player.create

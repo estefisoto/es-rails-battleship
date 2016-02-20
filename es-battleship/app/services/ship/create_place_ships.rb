@@ -3,7 +3,7 @@ class CreatePlaceShips
 		ORIENTATION_MAP = { 
 			"0" => { x:0, y: -1}, 
 			"1" => { x: 1, y: 0}, 
-			"2" => { x:0, y: -1}, 
+			"2" => { x:0, y: 1}, 
 			"3" => { x: -1, y:0}
 		}
 
@@ -37,8 +37,8 @@ class CreatePlaceShips
 		end
 
 		def get_first_location
-			x = rand(1..Rails.application.config.row_num)
-			y = rand(1..Rails.application.config.col_num)
+			x = rand(1..Ocean::X_COUNT)
+			y = rand(1..Ocean::Y_COUNT)
 			# If location already exists it must be OCCUPPIED by ship
 			if @ocean.location_valid(x,y)
 				rand_loc = Location.new(x:x, y:y)
@@ -51,7 +51,9 @@ class CreatePlaceShips
 			@ship_length = Ship::SHIPTYPE_LENGTH_MAP[@ship.kind]
 			x_end = @first_loc.x + @delta[:x] * (@ship_length - 1)
 			y_end = @first_loc.y + @delta[:y] * (@ship_length - 1)
-			if @ocean.location_valid(x_end,y_end)
+			next_x = @first_loc.x + @delta[:x] * (@ship_length)
+			next_y = @first_loc.y + @delta[:y] * (@ship_length)
+			if @ocean.location_valid(x_end,y_end) && @ocean.location_valid(next_x,next_y)
 				valid = true
 				@last_loc = Location.new(x:x_end, y:y_end)
 			else
@@ -61,13 +63,9 @@ class CreatePlaceShips
 		end
 
 		def set_ship_locations
-			# TODO order corrrectly
 			@first_loc.state = Location::LOCATION_STATE_MAP[Location::OCCUPPIED]
-			@last_loc.state = Location::LOCATION_STATE_MAP[Location::OCCUPPIED]
 			@first_loc.save
-			@last_loc.save
 			set_location @first_loc
-			set_location @last_loc
 			for i in 1..(@ship_length-2)
 				x = @first_loc.x + @delta[:x] * i
 				y = @first_loc.y + @delta[:y] * i
@@ -76,6 +74,9 @@ class CreatePlaceShips
 				loc.save
 				set_location loc
 			end
+			@last_loc.state = Location::LOCATION_STATE_MAP[Location::OCCUPPIED]
+			@last_loc.save
+			set_location @last_loc
 		end
 
 		def set_location(loc)
