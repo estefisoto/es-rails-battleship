@@ -8,10 +8,10 @@ class LocationDecorator < Draper::Decorator
 
   def metadata
     location_hash =  {
-        state: state,
         x: x,
         y: y ,
-        ship_kind: ship.kind.to_s
+        isHit: self.is_hit?,
+        ship_kind: ship.nil? ? "" : ship.kind.to_s
     }
   end
 end

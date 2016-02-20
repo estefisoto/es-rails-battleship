@@ -6,7 +6,8 @@ class GameController < ApplicationController
 	end
 
 	def play
-		player = get_player_from_token(params[:token])
+		@player_token = params[:token]
+		player = get_player_from_token(@player_token)
 		ocean = Ocean.find_by(player:player)
 		@row_count = Ocean::X_COUNT
 		@col_count = Ocean::Y_COUNT
