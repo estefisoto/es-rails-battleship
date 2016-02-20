@@ -46,6 +46,7 @@ class Ocean < ActiveRecord::Base
 				end
 				if sunk
 					ship.sunk_state = true
+					ship.save
 				end
 				break
 			end
@@ -54,7 +55,7 @@ class Ocean < ActiveRecord::Base
 	end
 
 	def check_for_all_sunk
-		if self.ships.find_by(sunk_state:true).count == Ship::SHIPTYPE_LENGTH_MAP.keys.length
+		if self.ships.where(sunk_state:true).length == Ship::SHIPTYPE_LENGTH_MAP.keys.length
 			true
 		else
 			false

@@ -16,8 +16,8 @@ class Player < ActiveRecord::Base
 	  end
 	end
 
-	def won
-
+	def is_active?
+		self.active
 	end
 
 end
