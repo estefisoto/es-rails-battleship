@@ -21,5 +21,6 @@ module EsBattleship
     config.active_record.raise_in_transactional_callbacks = true
     config.row_num = 10
     config.col_num = 10 
+    config.channel_base_name = "/play/action/hit/"
   end
 end

@@ -19,6 +19,7 @@ class GameController < ApplicationController
 		@row_count = Ocean::X_COUNT
 		@col_count = Ocean::Y_COUNT
 		@locations = LocationDecorator.decorate_collection(ocean.locations).as_json
+		@subscribe_channel = "#{Rails.application.config.channel_base_name}#{@player_token}"
 	end
 
 	def start_game
