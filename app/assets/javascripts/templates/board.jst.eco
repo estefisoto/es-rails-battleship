@@ -1,7 +1,7 @@
 <% for x in [1..@rowCount] : %> 
 	 <tr>
 	 	<% for y in [1..@colCount] : %> 
-	 	<td class="empty <%= if @opponent then "js-ready"%>" data-x= <%= x %> data-y= <%= y %>></td>
+	 	<td class="battlefield-cell empty <%= if @opponent then "js-ready"%>" data-x= <%= x %> data-y= <%= y %>></td>
 	 	<% end %> 
 	 </tr>
 <% end %> 

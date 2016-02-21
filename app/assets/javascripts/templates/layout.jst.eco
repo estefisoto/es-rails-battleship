@@ -1,16 +1,21 @@
-<div class="mr-banner">
-
-</div>
-
-<div class="mr-player-container">
-
-</div>
-
-<div class="mr-self-board-container">
-</div>
-
-<div class="mr-opponent-board-container">
-</div>
-
-<div class="mr-game-state-container">
+<div id="main-container" class="container">
+      <div class="row">
+      	<div class="mr-banner"><h2>Estefi's Blattleship Game</h2></div>
+      </div>
+      <div class="row">
+      	<div class="mr-player-container">
+      		<div class="info-text col-md-6">Your Battle Field</div>
+      		<div class="info-text col-md-6">Opponent's Battle Field</div>
+      	</div>
+      </div>
+      <div class="row">
+      	<div class="mr-self-board-container col-md-6"></div>
+      	<div class="mr-opponent-board-container col-md-6"></div>
+      </div>
+      <div class="row">
+      	<div class="mr-game-state-container info-text col-md-12"></div>
+      </div>
+      <div class="row">
+      	<div class="info-text col-md-6">Your game token is: <%= @token %> </div>
+      </div>
 </div>

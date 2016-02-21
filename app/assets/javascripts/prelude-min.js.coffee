@@ -3,3 +3,4 @@
 #= require turbolinks
 #= require path-helper
 #= require private_pub
+#= require bootstrap-sprockets

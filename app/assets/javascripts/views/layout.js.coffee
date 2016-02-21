@@ -14,6 +14,9 @@ class Estefis.Views.Layout extends Backbone.Marionette.LayoutView
     'opponentBoardContainer': 	'.mr-opponent-board-container'
     'gameStateContainer':   		'.mr-game-state-container'
 
+  templateHelpers: ->
+    token: @token
+    
   initialize: (options) ->
     @token = options.playerToken
     @turn = options.turn
