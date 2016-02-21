@@ -1,0 +1,7 @@
+<% if @inProgress : %>
+	Game in progress ... May the best player win!
+<% else if @won :  %>
+	Game Over! You Won :) !!!!
+<% else : %>
+	Game Over! You lost :(.. <a href='/'> Try again </a>
+<% end %>
