@@ -1,5 +1,5 @@
 <% if @inProgress : %>
-	Game in progress ... May the best player win!
+	Your turn, attack by clicking on the opponents battlefield cell!
 <% else if @won :  %>
 	Game Over! You Won :) !!!!
 <% else : %>
