@@ -17,6 +17,9 @@ class Service::PlayActionController < ApplicationController
 		if isHit && opponent_ocean.check_for_sunk(x.to_i, y.to_i)
 			action_results[:gameOver] = opponent_ocean.check_for_all_sunk
 		end
+		game = player.game
+		game.turn = opponent.id
+		game.save
 		# Publish results to opponent channel
 		PublishPlayAction.new(player: opponent, message: action_results ).call
 		render json: action_results

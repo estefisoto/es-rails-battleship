@@ -18,28 +18,34 @@ class Estefis.Views.Board extends Backbone.Marionette.ItemView
 		@oceanLocations = options.locations
 		@token = options.playerToken || false
 		@opponent = options.opponent || false
+		@turn = options.turn || false
 		unless @opponent
-			@on "opponent:action", (data) =>
-				$cellAffected = @$el.find(" td[data-x='"+data.x+"'][data-y='"+data.y+"']")
-				@addCellState($cellAffected, data.isHit)
-				@trigger "game:lost" if data.gameOver
+		  @on "opponent:action", (data) =>
+		  	$cellAffected = @$el.find(" td[data-x='"+data.x+"'][data-y='"+data.y+"']")
+		  	@addCellState($cellAffected, data.isHit)
+		  	if data.gameOver
+		  		@trigger "game:lost"
+		  	else
+		  		@trigger "game:turn"
 		return
 
 	onShow: ->
 		@displayLocations() if @oceanLocations?
 		return
 
-	hitClick: (evt) ->
-		$cellClicked = $(evt.target)
-		x = $cellClicked.data('x')
-		y = $cellClicked.data('y')
-		url = '/service/play/hit/'+@token+'/'+x+'/'+y
-		$.get( url, (data) => 
-			# Do not allow user to click on same cell
-			$cellClicked.removeClass( "empty js-ready" )
-			@addCellState($cellClicked, data.isHit)
-			@trigger "game:won" if data.gameOver
-		)
+	hitClick: (evt) =>
+		if @turn
+			$cellClicked = $(evt.target)
+			x = $cellClicked.data('x')
+			y = $cellClicked.data('y')
+			url = '/service/play/hit/'+@token+'/'+x+'/'+y
+			$.get( url, (data) => 
+				# Do not allow user to click on same cell
+				$cellClicked.removeClass( "empty js-ready" )
+				@addCellState($cellClicked, data.isHit)
+				@trigger "game:won" if data.gameOver
+			)
+			@trigger "game:wait"
 		return
 
 	displayLocations: ->

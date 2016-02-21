@@ -9,7 +9,8 @@
    	 playerToken: <%= raw @player_token.to_json %>,
    	 locations: <%= raw @locations.to_json %>,
    	 rowCount: <%= @row_count %>,
-   	 colCount: <%= @col_count %>
+   	 colCount: <%= @col_count %>,
+   	 turn: <%= @turn %>
     });
   });
 <% end %>
