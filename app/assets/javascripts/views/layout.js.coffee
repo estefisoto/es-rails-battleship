@@ -1,5 +1,6 @@
 #= require templates/layout
 #= require views/board
+#= require views/game_status
 
 Estefis.Views ?= {}
 class Estefis.Views.Layout extends Backbone.Marionette.LayoutView
@@ -13,27 +14,39 @@ class Estefis.Views.Layout extends Backbone.Marionette.LayoutView
     'gameStateContainer':   		'.mr-game-state-container'
 
   initialize: (options) ->
-    @token = options.player_token
+    @token = options.playerToken
     @playerBoardView = new Estefis.Views.Board
-      row_count:options.row_count
-      col_count:options.col_count
+      rowCount:options.rowCount
+      colCount:options.colCount
       locations: options.locations
-      player_token: options.player_token
+      playerToken: options.playerToken
 
     @opponentBoardView = new Estefis.Views.Board
-      row_count:options.row_count
-      col_count:options.col_count
-      player_token: options.player_token
+      rowCount:options.rowCount
+      colCount:options.colCount
+      playerToken: options.playerToken
       opponent: true
+
+    @gameStatusView = new Estefis.Views.GameStatus
+      inProgress: true
+
+    @playerBoardView.on "game:lost", =>
+      @won = false
+      @updateGameStatus()
+
+    @opponentBoardView.on "game:won", =>
+      @won = true
+      @updateGameStatus()
 
     # Subscribe to player's channel to get/display actions from opponent player
     @subscribeToChannel()
     true
 
   onShow: ->
-  	@selfBoardContainer.show @playerBoardView
-  	@opponentBoardContainer.show @opponentBoardView
-  	true
+    @selfBoardContainer.show @playerBoardView
+    @opponentBoardContainer.show @opponentBoardView
+    @gameStateContainer.show @gameStatusView
+    true
 
   subscribeToChannel: ->
     channelName = Estefis.ChannelBaseName + @token
@@ -41,3 +54,14 @@ class Estefis.Views.Layout extends Backbone.Marionette.LayoutView
       @playerBoardView.trigger "opponent:action", data
     )
     return
+
+  updateGameStatus: ->
+    @gameStateContainer.reset()
+    if @won
+      @gameStatusView = new Estefis.Views.GameStatus
+        won: true
+      @gameStateContainer.show @gameStatusView
+    else
+      @gameStatusView = new Estefis.Views.GameStatus
+        won: false
+      @gameStateContainer.show @gameStatusView

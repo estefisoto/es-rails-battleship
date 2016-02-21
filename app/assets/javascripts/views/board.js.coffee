@@ -13,16 +13,16 @@ class Estefis.Views.Board extends Backbone.Marionette.ItemView
 	  opponent: @opponent
 
 	initialize:(options) ->
-		@rowCount = options.row_count
-		@colCount = options.col_count
+		@rowCount = options.rowCount
+		@colCount = options.colCount
 		@oceanLocations = options.locations
-		@token = options.player_token || false
+		@token = options.playerToken || false
 		@opponent = options.opponent || false
 		unless @opponent
 			@on "opponent:action", (data) =>
 				$cellAffected = @$el.find(" td[data-x='"+data.x+"'][data-y='"+data.y+"']")
 				@addCellState($cellAffected, data.isHit)
-
+				@trigger "game:lost" if data.gameOver
 		return
 
 	onShow: ->
@@ -38,6 +38,7 @@ class Estefis.Views.Board extends Backbone.Marionette.ItemView
 			# Do not allow user to click on same cell
 			$cellClicked.removeClass( "empty js-ready" )
 			@addCellState($cellClicked, data.isHit)
+			@trigger "game:won" if data.gameOver
 		)
 		return
 
