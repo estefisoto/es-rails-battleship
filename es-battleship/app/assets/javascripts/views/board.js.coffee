@@ -2,27 +2,27 @@
 Estefis.Views ?= {}
 class Estefis.Views.Board extends Backbone.Marionette.ItemView
 	template: 'templates/board'
-	className: 'board'
 	tagName: 'table'
 
 	events:
     "click .js-ready": 'hitClick'
 
 	templateHelpers: ->
-	    rowCount: @rowCount
-	    colCount: @colCount
-	    opponent: @opponent
+	  rowCount: @rowCount
+	  colCount: @colCount
+	  opponent: @opponent
 
 	initialize:(options) ->
 		@rowCount = options.row_count
 		@colCount = options.col_count
-		if options.locations?
-			@oceanLocations = options.locations
-			@opponent = false
-		else
-			@opponent = true
-		if options.player_token?
-			@token = options.player_token
+		@oceanLocations = options.locations
+		@token = options.player_token || false
+		@opponent = options.opponent || false
+		unless @opponent
+			@on "opponent:action", (data) =>
+				$cellAffected = @$el.find(" td[data-x='"+data.x+"'][data-y='"+data.y+"']")
+				@addCellState($cellAffected, data.isHit)
+
 		return
 
 	onShow: ->
@@ -30,7 +30,7 @@ class Estefis.Views.Board extends Backbone.Marionette.ItemView
 		return
 
 	hitClick: (evt) ->
-		$cellClicked= $(evt.target)
+		$cellClicked = $(evt.target)
 		x = $cellClicked.data('x')
 		y = $cellClicked.data('y')
 		url = '/service/play/hit/'+@token+'/'+x+'/'+y

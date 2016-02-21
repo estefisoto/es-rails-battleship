@@ -2,6 +2,7 @@
   <%= yield %>
 </main>
 <%= javascript_include_tag "play.js" %>
+<%= subscribe_to @subscribe_channel %>
 <%= javascript_tag do %>
   jQuery(function($) {
    	Estefis.BattleShipGame.start({
