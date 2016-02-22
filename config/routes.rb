@@ -5,8 +5,6 @@ Rails.application.routes.draw do
   get 'play', to: 'game#home'
   get 'play/:token', to: 'game#play', as: :play_game
   get 'start', to: 'game#start_game'
-  get '*path' => redirect('/')
-
 
   # --------------------------------------------------------------------------------------------------------------------
   # SERVICE 
